@@ -1,0 +1,33 @@
+<?php
+    $header = false;
+
+    include('./includes/product_functions.inc.php');
+
+    while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+        if (!$header) {
+            echo BOX_BEGIN;
+            echo '<h2>' . $category . '</h2>
+            <div class="img-box"><p><img alt="' . $category . '" src="/products/' .
+            $row['g_image'] . '" />'. $row['g_description'] . '</p></div>';
+            echo BOX_END;
+            echo '<p><br clear="all" /></p>';
+            echo BOX_BEGIN;
+            
+            $header = true;
+        }// End of $header IF.
+
+        echo '<h3>' . $row['name'] . '</h3>
+        <div class="img-box"><p><img alt="' . $row['name'] . '" src="/products/' .
+        $row['image']  . '" />' . $row['description'] . '<br />
+        <strong>Price:</strong> ' . get_price($type, $row['price'], $row['sale_price']) . '<br />
+        <strong>Availability:</strong> ' . get_stock_status($row['stock']) . '</p>
+        <p><a href="/cart.php?sku=' . $row['sku'] . '&action=add" class="button">Add to Cart</a></p></div>';
+
+        echo '<h3>Red Dragon Mug</h3>
+        <div class="img-box"><p><img alt="Red Dragon Mug" src="/products/imagename.ext"/>Actual Description<br />
+        <strong>Price:</strong> $4.50<br />   <strong>Availability:</strong> 67</p>
+        <p><a href="/cart.php?sku=O23&action=add" class="button">Add to Cart</a></p></div>';
+	}
+
+	echo '<p> <br clear="all" /></p>';
+    echo BOX_END;

@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+
+# For sales:
+RewriteRule ^shop/sales/?$ sales.php
+
+# For the primary categories:
+RewriteRule ^shop/(coffee|goodies)/?$ /shop.php?type=$1
+
+# For specific products:
+RewriteRule ^browse/(coffee|goodies)/([A-Za-z\+\-]+)/([0-9]+)/?$ browse.php?
+type=$1&category=$2&id=$3
+
+#Modified version:
+RewriteRule ^browse/(coffee|goodies)/([A-Za-z\+\-]+)/([0-9]+)(/([0-9]+)/([0-9]+))?/?$
+browse.php?type=$1&category=$2&id=$3&s=$5&np=$6
+
+</IfModule>
